@@ -59,7 +59,7 @@ function SignUp() {
       <form className="signUp--form" action="" onSubmit={handleSubmit}>
         <div className="input__container">
           <label className="form__label" htmlFor="userName">
-            Username:
+            Username
           </label>
           <input
             className="form__input"
@@ -127,10 +127,12 @@ function SignUp() {
           submit
         </button>
       </form>
-      <p className="message">Already have an account?</p>
-      <Link className="link__login" to={'/login'}>
-        login
-      </Link>
+      <div className="div__container">
+        <p className="message">Already have an account?</p>
+        <Link className="link__login" to={'/login'}>
+          Login
+        </Link>
+      </div>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './EditEvent.scss';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
@@ -8,6 +8,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 function EditEvent() {
   const { auth } = useAuth();
   const { id } = useParams();
+  // const firstRef = useRef();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || '/events';
@@ -18,6 +19,10 @@ function EditEvent() {
   const [editEventLocation, setEditEventLocation] = useState('');
   const [editEventDateTime, setEditEventDateTime] = useState('');
   const [editEvent, setEditEvent] = useState(false);
+
+  // useEffect(() => {
+  //   firstRef.current.focus();
+  // });
 
   useEffect(() => {
     axios
@@ -83,6 +88,7 @@ function EditEvent() {
             placeholder={oldEvent.name}
             id="name"
             type="text"
+            // ref={firstRef}
           />
           <label htmlFor="description">Description:</label>
           <input

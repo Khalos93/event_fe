@@ -1,3 +1,4 @@
+import './Events.scss';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import useAuth from '../../hooks/useAuth';
@@ -22,24 +23,32 @@ function Events() {
   });
 
   return (
-    <div>
+    <div className="events__container">
       <h1 className="event__title">Events</h1>
+      <div className="container_to_flex">
+        {events.map(event => {
+          const dateTime = formatDate(event.dateTime);
 
-      {events.map(event => {
-        const dateTime = formatDate(event.dateTime);
+          return (
+            <Link
+              className="event__link"
+              key={event.id}
+              to={`/events/${event.id}`}
+            >
+              <article className="event__article">
+                <h2 className="article__name">{event.name}</h2>
+                <p className="article__description">{event.description}</p>
+                <p className="article__location">{event.location}</p>
+                <p className="article__date">{dateTime}</p>
+              </article>
+            </Link>
+          );
+        })}
+      </div>
 
-        return (
-          <Link key={event.id} to={`/events/${event.id}`}>
-            <article className="event__article">
-              <h2 className="article__name">{event.name}</h2>
-              <p className="article__description">{event.description}</p>
-              <p className="article__location">{event.location}</p>
-              <p className="article__date">{dateTime}</p>
-            </article>
-          </Link>
-        );
-      })}
-      <Link to={`/create-event`}>Post new Event</Link>
+      <Link className="createEvent" to={`/create-event`}>
+        Post new Event
+      </Link>
     </div>
   );
 }

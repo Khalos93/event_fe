@@ -1,5 +1,7 @@
 .login__section {
-  background-color: #6d2fdb;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(#100230, #180348);
 }
 
 .errmsg {
@@ -8,6 +10,20 @@
 
 .offscreen {
   display: none;
+}
+
+.login__title {
+  margin-top: 0rem;
+  padding-top: 2rem;
+  color: white;
+}
+
+.login__form {
+  margin-bottom: 3rem;
+}
+
+.login__label {
+  color: white;
 }
 
 input {

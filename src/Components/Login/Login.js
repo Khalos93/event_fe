@@ -67,7 +67,9 @@ function Login() {
       </p>
       <h1 className="login__title">Login</h1>
       <form onSubmit={handleSubmit} className="login__form">
-        <label htmlFor="username">Username:</label>
+        <label className="login__label" htmlFor="username">
+          Email:
+        </label>
         <input
           className="input__username"
           type="text"
@@ -80,7 +82,9 @@ function Login() {
           value={user}
           required
         />
-        <label htmlFor="password">Password:</label>
+        <label className="login__label" htmlFor="password">
+          Password:
+        </label>
         <input
           className="input__password"
           type="password"
@@ -92,15 +96,19 @@ function Login() {
           autoComplete="off"
           required
         />
-        <button>Login</button>
+        <button className="submit__btn">Login</button>
       </form>
-      <p>
-        Need an account?
-        <br />
-        <span>
-          <Link to={'/signUp'}>Sign Up</Link>
-        </span>
-      </p>
+      <div className="div__container">
+        <p className="message">
+          Need an account?
+          <br />
+          <span>
+            <Link className="link__login" to={'/signUp'}>
+              Sign Up
+            </Link>
+          </span>
+        </p>
+      </div>
     </section>
   );
 }

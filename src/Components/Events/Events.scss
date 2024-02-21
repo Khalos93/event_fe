@@ -1,0 +1,40 @@
+.events__container {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(#100230, #180348);
+}
+
+.event__title {
+  margin-top: 0;
+  padding-top: 2rem;
+  color: white;
+}
+
+.container_to_flex {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.event__link {
+  display: block;
+  width: 30rem;
+  text-decoration: none;
+  color: white;
+  box-shadow: 2px 2px #5840ff;
+  border-radius: 5px;
+}
+
+.createEvent {
+  display: block;
+  margin-top: 4rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 0.7rem;
+  text-decoration: none;
+  border-radius: 8px;
+  background-color: #ee37f7;
+  width: 20rem;
+  height: 4rem;
+  color: black;
+  font-size: 2rem;
+}
