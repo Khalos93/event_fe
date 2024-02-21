@@ -1,27 +1,34 @@
 import React from 'react';
+import './SignUp.scss';
 import { useState } from 'react';
 import '../utils/formValidation';
 import validation from '../utils/formValidation';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 function SignUp() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || '/login';
+
   const [values, setValues] = useState({
     userName: '',
     email: '',
     password: '',
     repeatPassword: ''
   });
+
   const [errors, setErrors] = useState({});
 
   function handleInput(e) {
     setValues(prev => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     setErrors(validation(values));
-    console.log(values);
-    console.log(errors);
+
     if (
       errors.userName === '' &&
       errors.email === '' &&
@@ -33,24 +40,29 @@ function SignUp() {
         email: values.email,
         password: values.password
       };
-      console.log(query);
+
       axios
-        .post(`http://localhost:8080/signup`, query)
+        .post(`http://localhost:8585/signup`, query)
         .then(res => {
           console.log(res);
+          e.target.reset();
+          navigate(from, { replace: true });
         })
         .catch(err => {
-          console.error(err);
+          console.log(err);
         });
     }
   }
   return (
-    <div>
-      <h2>Register</h2>
-      <form action="" onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="userName">Username:</label>
+    <div className="container">
+      <h2 className="title">Register</h2>
+      <form className="signUp--form" action="" onSubmit={handleSubmit}>
+        <div className="input__container">
+          <label className="form__label" htmlFor="userName">
+            Username:
+          </label>
           <input
+            className="form__input"
             id="userName"
             name="userName"
             type="text"
@@ -58,11 +70,16 @@ function SignUp() {
             autoComplete="off"
             onChange={handleInput}
           />
-          {errors.usurName && <span>{errors.usurName}</span>}
+          {errors.userName && (
+            <span className="form__error">{errors.userName}</span>
+          )}
         </div>
-        <div>
-          <label htmlFor="email">email</label>
+        <div className="input__container">
+          <label className="form__label" htmlFor="email">
+            email
+          </label>
           <input
+            className="form__input"
             id="email"
             name="email"
             type="email"
@@ -70,11 +87,14 @@ function SignUp() {
             autoComplete="off"
             onChange={handleInput}
           />
-          {errors.email && <span>{errors.email}</span>}
+          {errors.email && <span className="form__error">{errors.email}</span>}
         </div>
-        <div>
-          <label htmlFor="password">password</label>
+        <div className="input__container">
+          <label className="form__label" htmlFor="password">
+            password
+          </label>
           <input
+            className="form__input"
             id="password"
             name="password"
             type="password"
@@ -82,11 +102,16 @@ function SignUp() {
             autoComplete="off"
             onChange={handleInput}
           />
-          {errors.password && <span>{errors.password}</span>}
+          {errors.password && (
+            <span className="form__error">{errors.password}</span>
+          )}
         </div>
-        <div>
-          <label htmlFor="repeatPassword">Confirm password</label>
+        <div className="input__container">
+          <label className="form__label" htmlFor="repeatPassword">
+            Confirm password
+          </label>
           <input
+            className="form__input"
             id="repeatPassword"
             type="password"
             name="repeatPassword"
@@ -94,10 +119,18 @@ function SignUp() {
             autoComplete="off"
             onChange={handleInput}
           />
-          {errors.repeatPassword && <span>{errors.repeatPassword}</span>}
+          {errors.repeatPassword && (
+            <span className="form__error">{errors.repeatPassword}</span>
+          )}
         </div>
-        <button type="submit">submit</button>
+        <button className="submit__btn" type="submit">
+          submit
+        </button>
       </form>
+      <p className="message">Already have an account?</p>
+      <Link className="link__login" to={'/login'}>
+        login
+      </Link>
     </div>
   );
 }
